@@ -13,5 +13,8 @@
     "http-errors": "~1.6.2",
     "mongoose": "^5.3.8",
     "morgan": "~1.9.0"
+  },
+  "devDependencies": {
+    "google-charts": "^1.5.0"
   }
 }

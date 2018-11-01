@@ -12,6 +12,16 @@ router.get('/', function(req, res, next) {
   }); 
 });
 
+router.get('/despesas', async (req, res) =>{
+  try{
+      const despesas = await model.find()
+      return res.send({despesas},)
+  }catch(erro){
+      console.log(erro)
+      return res.status(400).send({error:'Tarefa não encontrada'})
+  }
+})
+
 router.post('/despesas', function(req, res, next){
   var body = req.body;
   body.status = false;
