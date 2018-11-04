@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var model = require('./../model/despesas')();
+var db = require('./../libs/connect_db');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,19 +9,29 @@ router.get('/', function(req, res, next) {
     if (err) {
       throw err;
     }
-    res.render('index', { title: 'ToDoList - Adelson', despesas: despesas });
+    res.render('index', { title: 'Despesas - Adelson', despesas: despesas });
   }); 
 });
 
+/*router.get('/despesas', function (req, res){
+  console.log('/despesas: I received a GET request');
+  db.despesas.find(function(err, docs){
+    console.log(docs);
+    res.json(docs);
+  });
+
+});*/
+
+
 router.get('/despesas', async (req, res) =>{
-  try{
+try{
       const despesas = await model.find()
-      return res.send({despesas},)
+      return res.send({despesas})
   }catch(erro){
       console.log(erro)
       return res.status(400).send({error:'Tarefa não encontrada'})
   }
-})
+});
 
 router.post('/despesas', function(req, res, next){
   var body = req.body;
